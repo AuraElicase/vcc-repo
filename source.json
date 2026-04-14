@@ -1,15 +1,15 @@
 {
-    "name":"Example Listing",
-    "id":"com.vrchat.example-listing",
-    "url":"https://vrchat-community.github.io/template-package-listing/index.json",
+    "name":"AuraElicase's VRChat Package Listing",
+    "id":"tech.elicase.vcclist",
+    "url":"https://vcc.elicase.tech/index.json",
     "author":{
-        "email":"developer@vrchat.com",
-        "name":"VRChat",
-        "url":"https://hello.vrchat.com"
+        "email":"auraelicase@outlook.com",
+        "name":"AuraElicase",
+        "url":"https://github.com/AuraElicase"
     },
-    "description":"Example listing of VRChat packages",
+    "description":"AuraElicase's listing of VRChat packages",
     "infoLink":{
-        "url":"http://github.com/vrchat-community/template-package-listing",
+        "url":"https://github.com/AuraElicase/vcc-repo",
         "text":"View on GitHub"
     },
     "bannerUrl":"banner.png",
