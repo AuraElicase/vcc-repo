@@ -28,53 +28,69 @@ const PACKAGES = {
 };
 
 (() => {
+  // Helper to safely add event listener
+  const safeAddListener = (id, type, handler) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener(type, handler);
+      return el;
+    }
+    return null;
+  };
+
   const packageGrid = document.getElementById('packageGrid');
   const searchInput = document.getElementById('searchInput');
 
   // Search logic
-  searchInput.addEventListener('input', ({ target: { value = '' }}) => {
-    const cards = packageGrid.querySelectorAll('.package-card');
-    cards.forEach(card => {
+  if (searchInput && packageGrid) {
+    searchInput.addEventListener('input', ({ target: { value = '' }}) => {
+      const cards = packageGrid.querySelectorAll('.package-card');
       const searchStr = value.toLowerCase();
-      const matches = 
-        card.dataset.packageName?.toLowerCase().includes(searchStr) ||
-        card.dataset.packageId?.toLowerCase().includes(searchStr);
-      
-      card.style.display = matches ? 'flex' : 'none';
+      cards.forEach(card => {
+        const matches = 
+          card.dataset.packageName?.toLowerCase().includes(searchStr) ||
+          card.dataset.packageId?.toLowerCase().includes(searchStr);
+        
+        card.style.display = matches ? 'flex' : 'none';
+      });
     });
-  });
+  }
 
   // Help dialog
-  const urlBarHelpButton = document.getElementById('urlBarHelp');
   const addListingToVccHelp = document.getElementById('addListingToVccHelp');
-  urlBarHelpButton.addEventListener('click', () => {
-    addListingToVccHelp.show();
+  safeAddListener('urlBarHelp', 'click', () => {
+    if (addListingToVccHelp) addListingToVccHelp.show();
   });
 
   // Copy listing URL
-  const vccListingInfoUrlFieldCopy = document.getElementById('vccListingInfoUrlFieldCopy');
-  vccListingInfoUrlFieldCopy.addEventListener('click', async () => {
+  safeAddListener('vccListingInfoUrlFieldCopy', 'click', async () => {
     const vccUrlField = document.getElementById('vccListingInfoUrlField');
-    await navigator.clipboard.writeText(vccUrlField.value);
-    
-    // Simple visual feedback
-    const icon = vccListingInfoUrlFieldCopy.querySelector('md-icon');
-    const oldIcon = icon.textContent;
-    icon.textContent = 'check';
-    setTimeout(() => { icon.textContent = oldIcon; }, 2000);
+    const copyButton = document.getElementById('vccListingInfoUrlFieldCopy');
+    if (vccUrlField) {
+      await navigator.clipboard.writeText(vccUrlField.value);
+      
+      // Simple visual feedback
+      if (copyButton) {
+        const icon = copyButton.querySelector('md-icon');
+        if (icon) {
+          const oldIcon = icon.textContent;
+          icon.textContent = 'check';
+          setTimeout(() => { icon.textContent = oldIcon; }, 2000);
+        }
+      }
+    }
   });
 
   // Add Repo to VCC
-  const vccAddRepoButton = document.getElementById('vccAddRepoButton');
-  vccAddRepoButton.addEventListener('click', () => {
+  const addRepoHandler = () => {
     window.location.assign(`vcc://vpm/addRepo?url=${encodeURIComponent(LISTING_URL)}`);
-  });
+  };
+
+  safeAddListener('vccAddRepoButton', 'click', addRepoHandler);
 
   const rowAddToVccButtons = document.querySelectorAll('.rowAddToVccButton');
   rowAddToVccButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      window.location.assign(`vcc://vpm/addRepo?url=${encodeURIComponent(LISTING_URL)}`);
-    });
+    button.addEventListener('click', addRepoHandler);
   });
 
   // Package info modal
@@ -93,49 +109,60 @@ const PACKAGES = {
     button.addEventListener('click', () => {
       const packageId = button.dataset.packageId;
       const info = PACKAGES[packageId];
-      if (!info) return;
+      if (!info || !packageInfoModal) return;
 
-      packageInfoName.textContent = info.displayName;
-      packageInfoId.textContent = info.name;
-      packageInfoVersion.label = `v${info.version}`;
-      packageInfoDescription.textContent = info.description;
-      packageInfoAuthor.innerHTML = `${info.author.name} <md-icon>open_in_new</md-icon>`;
-      packageInfoAuthor.href = info.author.url;
+      if (packageInfoName) packageInfoName.textContent = info.displayName;
+      if (packageInfoId) packageInfoId.textContent = info.name;
+      if (packageInfoVersion) packageInfoVersion.label = `v${info.version}`;
+      if (packageInfoDescription) packageInfoDescription.textContent = info.description;
+      if (packageInfoAuthor) {
+        packageInfoAuthor.innerHTML = `${info.author.name} <md-icon>open_in_new</md-icon>`;
+        packageInfoAuthor.href = info.author.url;
+      }
 
       // Dependencies
-      packageInfoDependencies.innerHTML = '';
-      const deps = Object.entries(info.dependencies);
-      if (deps.length > 0) {
-        document.getElementById('dependenciesSection').classList.remove('hidden');
-        deps.forEach(([name, version]) => {
-          const li = document.createElement('li');
-          li.textContent = `${name} @ ${version}`;
-          packageInfoDependencies.appendChild(li);
-        });
-      } else {
-        document.getElementById('dependenciesSection').classList.add('hidden');
+      if (packageInfoDependencies) {
+        packageInfoDependencies.innerHTML = '';
+        const deps = Object.entries(info.dependencies);
+        const depSection = document.getElementById('dependenciesSection');
+        if (deps.length > 0) {
+          if (depSection) depSection.classList.remove('hidden');
+          deps.forEach(([name, version]) => {
+            const li = document.createElement('li');
+            li.textContent = `${name} @ ${version}`;
+            packageInfoDependencies.appendChild(li);
+          });
+        } else {
+          if (depSection) depSection.classList.add('hidden');
+        }
       }
 
       // Keywords
-      packageInfoKeywords.innerHTML = '';
-      if (info.keywords.length > 0) {
-        document.getElementById('keywordsSection').classList.remove('hidden');
-        info.keywords.forEach(kw => {
-          const chip = document.createElement('md-assist-chip');
-          chip.label = kw;
-          packageInfoKeywords.appendChild(chip);
-        });
-      } else {
-        document.getElementById('keywordsSection').classList.add('hidden');
+      if (packageInfoKeywords) {
+        packageInfoKeywords.innerHTML = '';
+        const kwSection = document.getElementById('keywordsSection');
+        if (info.keywords.length > 0) {
+          if (kwSection) kwSection.classList.remove('hidden');
+          info.keywords.forEach(kw => {
+            const chip = document.createElement('md-assist-chip');
+            chip.label = kw;
+            packageInfoKeywords.appendChild(chip);
+          });
+        } else {
+          if (kwSection) kwSection.classList.add('hidden');
+        }
       }
 
       // License
-      if (info.license) {
-        document.getElementById('licenseSection').classList.remove('hidden');
-        packageInfoLicense.innerHTML = `${info.license} <md-icon>policy</md-icon>`;
-        packageInfoLicense.href = info.licensesUrl || '#';
-      } else {
-        document.getElementById('licenseSection').classList.add('hidden');
+      if (packageInfoLicense) {
+        const licSection = document.getElementById('licenseSection');
+        if (info.license) {
+          if (licSection) licSection.classList.remove('hidden');
+          packageInfoLicense.innerHTML = `${info.license} <md-icon>policy</md-icon>`;
+          packageInfoLicense.href = info.licensesUrl || '#';
+        } else {
+          if (licSection) licSection.classList.add('hidden');
+        }
       }
 
       packageInfoModal.show();
@@ -143,11 +170,11 @@ const PACKAGES = {
   });
 
   // Modal close buttons
-  document.getElementById('packageInfoModalClose').addEventListener('click', () => {
-    packageInfoModal.close();
+  safeAddListener('packageInfoModalClose', 'click', () => {
+    if (packageInfoModal) packageInfoModal.close();
   });
-  document.getElementById('addListingToVccHelpClose').addEventListener('click', () => {
-    addListingToVccHelp.close();
+  safeAddListener('addListingToVccHelpClose', 'click', () => {
+    if (addListingToVccHelp) addListingToVccHelp.close();
   });
 
   // Download logic
