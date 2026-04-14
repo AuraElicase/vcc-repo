@@ -28,16 +28,16 @@
       </div>
       <div class="search-container">
         <md-outlined-text-field id="searchInput" placeholder="Search packages..." class="search-field">
-          <md-icon slot="leading-icon">search</md-icon>
+          <span class="material-icons-outlined" slot="leading-icon">search</span>
         </md-outlined-text-field>
       </div>
       <div class="header-actions">
         <md-filled-button id="vccAddRepoButton">
           Add to VCC
-          <md-icon slot="icon">add</md-icon>
+          <span class="material-icons-outlined" slot="icon">add</span>
         </md-filled-button>
         <md-standard-icon-button id="urlBarHelp">
-          <md-icon>help_outline</md-icon>
+          <span class="material-icons-outlined">help_outline</span>
         </md-standard-icon-button>
       </div>
     </div>
@@ -62,7 +62,7 @@
           <div class="info-link">
             <a href="{{listingInfo.InfoLink.Url}}" target="_blank" class="md-typescale-label-large">
               {{ if listingInfo.InfoLink.Text; listingInfo.InfoLink.Text; else; "Learn More"; end; }}
-              <md-icon>open_in_new</md-icon>
+              <span class="material-icons-outlined">open_in_new</span>
             </a>
           </div>
         {{~ end; ~}}
@@ -81,7 +81,7 @@
             <div class="card-content">
               <div class="card-header">
                 <div class="package-icon">
-                  <md-icon>box</md-icon>
+                  <span class="material-icons-outlined">inventory_2</span>
                 </div>
                 <div class="package-title-info">
                   <h3 class="package-name">{{ package.DisplayName }}</h3>
@@ -106,7 +106,7 @@
                 Details
               </md-outlined-button>
               <md-standard-icon-button class="rowMenuButton" data-package-url="{{ package.ZipUrl }}">
-                <md-icon>download</md-icon>
+                <span class="material-icons-outlined">download</span>
               </md-standard-icon-button>
             </div>
           </md-elevated-card>
@@ -118,7 +118,7 @@
   <!-- Modals / Dialogs -->
   <md-dialog id="addListingToVccHelp">
     <div slot="headline">
-      <md-icon>help</md-icon>
+      <span class="material-icons-outlined">help</span>
       How to add this listing to your VCC
     </div>
     <form slot="content" id="help-form" method="dialog">
@@ -133,7 +133,7 @@
       <div class="url-copy-box">
         <md-outlined-text-field id="vccListingInfoUrlField" readonly value="{{ listingInfo.Url }}" label="Listing URL" class="full-width">
           <md-icon-button id="vccListingInfoUrlFieldCopy" slot="trailing-icon">
-            <md-icon>content_copy</md-icon>
+            <span class="material-icons-outlined">content_copy</span>
           </md-icon-button>
         </md-outlined-text-field>
       </div>
@@ -155,7 +155,7 @@
       <div class="info-section">
         <h4 class="md-typescale-title-small">Author</h4>
         <a href="#" target="_blank" id="packageInfoAuthor" class="link-with-icon">
-          Author Name <md-icon>open_in_new</md-icon>
+          Author Name <span class="material-icons-outlined">open_in_new</span>
         </a>
       </div>
 
@@ -172,7 +172,7 @@
       <div class="info-section" id="licenseSection">
         <h4 class="md-typescale-title-small">License</h4>
         <a href="#" id="packageInfoLicense" target="_blank" class="link-with-icon">
-          License <md-icon>policy</md-icon>
+          License <span class="material-icons-outlined">policy</span>
         </a>
       </div>
     </div>

@@ -73,7 +73,7 @@
     --md-sys-color-outline-variant: #43474e;
     --md-sys-color-scrim: #000000;
     
-    --header-bg: #0d1117; /* Even darker for dark mode header */
+    --header-bg: #0d1117;
   }
 }
 
@@ -98,9 +98,25 @@ body {
   display: none !important;
 }
 
+/* Icon Global Styles */
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
 /* Material 3 Theme Application */
 .m3-theme {
-  /* Apply Material 3 color scheme to custom elements */
   --md-ref-palette-primary0: var(--md-sys-color-primary);
   --md-ref-palette-primary10: var(--md-sys-color-on-primary-container);
   --md-ref-palette-primary20: var(--md-sys-color-primary-container);
@@ -136,7 +152,7 @@ body {
   --md-ref-palette-tertiary40: var(--md-sys-color-tertiary);
   --md-ref-palette-tertiary50: var(--md-sys-color-tertiary);
   --md-ref-palette-tertiary60: var(--md-sys-color-tertiary);
-  --md-ref-palette-tertiary70: var(--md-sys-color-tertiary);
+  --md-ref-palette-tertiory70: var(--md-sys-color-tertiary);
   --md-ref-palette-tertiary80: var(--md-sys-color-tertiary);
   --md-ref-palette-tertiary90: var(--md-sys-color-tertiary-container);
   --md-ref-palette-tertiary95: var(--md-sys-color-tertiary-container);
@@ -185,7 +201,6 @@ body {
   --md-ref-palette-error99: var(--md-sys-color-error-container);
   --md-ref-palette-error100: var(--md-sys-color-on-error);
 
-  /* Custom properties for Material Web Components */
   --md-sys-color-surface-container-low: var(--md-sys-color-surface);
   --md-sys-color-surface-container: var(--md-sys-color-surface);
   --md-sys-color-surface-container-high: var(--md-sys-color-surface);
@@ -243,6 +258,11 @@ body {
   --md-outlined-text-field-focus-state-layer-color: rgba(255,255,255,0.1);
 }
 
+/* Ensure icons in slots match Material Design sizing */
+[slot="leading-icon"], [slot="trailing-icon"], [slot="icon"] {
+  font-size: 20px !important;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -263,7 +283,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  flex-grow: 1; /* Allow main content to grow */
+  flex-grow: 1;
 }
 
 /* Hero Section / Listing Info */
@@ -272,13 +292,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  align-items: center; /* Center align content */
+  align-items: center;
   text-align: center;
 }
 
 .banner-image {
   width: 100%;
-  max-width: 900px; /* Limit banner width */
+  max-width: 900px;
   height: 200px;
   background-size: cover;
   background-position: center;
@@ -339,7 +359,7 @@ body {
   font-weight: 500;
 }
 
-.info-link a md-icon {
+.info-link a .material-icons-outlined {
   font-size: 1.2em;
 }
 
@@ -371,7 +391,7 @@ body {
 
 .package-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Adjusted min-width for cards */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
@@ -381,7 +401,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Push actions to bottom */
+  justify-content: space-between;
   --md-elevated-card-container-color: var(--md-sys-color-surface-container-low);
 }
 
@@ -409,7 +429,7 @@ body {
   flex-shrink: 0;
 }
 
-.package-icon md-icon {
+.package-icon .material-icons-outlined {
   font-size: 2rem;
 }
 
@@ -432,7 +452,7 @@ body {
   font-size: 0.75rem;
   color: var(--md-sys-color-on-surface-variant);
   display: block;
-  word-break: break-all; /* Allow long IDs to break */
+  word-break: break-all;
 }
 
 .package-type md-assist-chip {
@@ -506,7 +526,7 @@ md-dialog [slot="headline"] {
   flex-direction: column;
   gap: 1.5rem;
   min-width: 300px;
-  padding: 1rem 0; /* Add padding for content within dialog */
+  padding: 1rem 0;
 }
 
 .meta-row {
@@ -592,42 +612,42 @@ md-dialog [slot="headline"] {
 /* Typography Helpers (Material 3) */
 .md-typescale-headline-small {
   font-family: var(--font-family);
-  font-size: 1.5rem; /* 24px */
-  line-height: 2rem; /* 32px */
+  font-size: 1.5rem;
+  line-height: 2rem;
   font-weight: 400;
   letter-spacing: 0em;
 }
 
 .md-typescale-title-small {
   font-family: var(--font-family);
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 500;
-  letter-spacing: 0.0071428572em; /* 0.1px */
+  letter-spacing: 0.0071428572em;
 }
 
 .md-typescale-body-medium {
   font-family: var(--font-family);
-  font-size: 1rem; /* 16px */
-  line-height: 1.5rem; /* 24px */
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-weight: 400;
-  letter-spacing: 0.03125em; /* 0.5px */
+  letter-spacing: 0.03125em;
 }
 
 .md-typescale-body-small {
   font-family: var(--font-family);
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 400;
-  letter-spacing: 0.035714286em; /* 0.5px */
+  letter-spacing: 0.035714286em;
 }
 
 .md-typescale-label-large {
   font-family: var(--font-family);
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 500;
-  letter-spacing: 0.0071428572em; /* 0.1px */
+  letter-spacing: 0.0071428572em;
 }
 
 /* Responsive Adjustments */
@@ -643,7 +663,7 @@ md-dialog [slot="headline"] {
   }
 
   .search-container {
-    order: 3; /* Move search below brand and actions */
+    order: 3;
     flex-basis: 100%;
     max-width: 100%;
   }
@@ -675,7 +695,7 @@ md-dialog [slot="headline"] {
   }
 
   .package-grid {
-    grid-template-columns: 1fr; /* Single column on very small screens */
+    grid-template-columns: 1fr;
   }
 
   .card-actions {

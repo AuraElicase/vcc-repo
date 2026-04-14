@@ -71,7 +71,7 @@ const PACKAGES = {
       
       // Simple visual feedback
       if (copyButton) {
-        const icon = copyButton.querySelector('md-icon');
+        const icon = copyButton.querySelector('.material-icons-outlined');
         if (icon) {
           const oldIcon = icon.textContent;
           icon.textContent = 'check';
@@ -116,7 +116,7 @@ const PACKAGES = {
       if (packageInfoVersion) packageInfoVersion.label = `v${info.version}`;
       if (packageInfoDescription) packageInfoDescription.textContent = info.description;
       if (packageInfoAuthor) {
-        packageInfoAuthor.innerHTML = `${info.author.name} <md-icon>open_in_new</md-icon>`;
+        packageInfoAuthor.innerHTML = `${info.author.name} <span class="material-icons-outlined">open_in_new</span>`;
         packageInfoAuthor.href = info.author.url;
       }
 
@@ -158,7 +158,7 @@ const PACKAGES = {
         const licSection = document.getElementById('licenseSection');
         if (info.license) {
           if (licSection) licSection.classList.remove('hidden');
-          packageInfoLicense.innerHTML = `${info.license} <md-icon>policy</md-icon>`;
+          packageInfoLicense.innerHTML = `${info.license} <span class="material-icons-outlined">policy</span>`;
           packageInfoLicense.href = info.licensesUrl || '#';
         } else {
           if (licSection) licSection.classList.add('hidden');
