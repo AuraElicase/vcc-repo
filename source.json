@@ -14,7 +14,8 @@
     },
     "bannerUrl":"banner.png",
     "githubRepos":[
-        "AuraElicase/VRChatArmatureComponentsExporter"
+        "AuraElicase/VRChatArmatureComponentsExporter",
+        "AuraElicase/VRChatGeneralAnimatorToggleSystem"
     ],
     "packages":[
         
