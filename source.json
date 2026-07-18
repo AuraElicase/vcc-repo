@@ -16,7 +16,8 @@
     "githubRepos":[
         "AuraElicase/VRChatArmatureComponentsExporter",
         "AuraElicase/VRChatGeneralAnimatorToggleSystem",
-        "AuraElicase/ElicaseAvatarTools"
+        "AuraElicase/ElicaseAvatarTools",
+        "ElicaseTech/ElicaseUIThemeForUnity"
     ],
     "packages":[
         
